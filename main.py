@@ -4,7 +4,8 @@ from awsfunctions import get_EC2_dns, load_to_S3
 from kafkafunctions import kafka_Produce, kafka_Consume
 from concurrent.futures import ThreadPoolExecutor
 
-EC2_dns = get_EC2_dns()
+instance_id = 'i-0755203d7564e5adc'
+EC2_dns = get_EC2_dns(instance_id)
 S3_bucket = 'flight-data-test-bucket-danariola83'
 topic = 'EC2_ip_test1'
 
