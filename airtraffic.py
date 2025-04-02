@@ -91,7 +91,7 @@ class AirTraffic:
     
     def get_flights_df(self):
         flights_json = self.get_flight_data()
-        df = self.data_to_df(flights_json, self.country)
+        df = self.data_to_df(flights_json)
         df = self.df_transformations(df)
         df = self.df_final(df)
 
