@@ -1,6 +1,7 @@
 .venv/
 aws_conn_test.py
 kafka-stock-market-streaming.pem
+kafka-EC2-machine.pem
 kafka-stock-market-streaming.pemZone.Identifier
 KafkaConsumer.ipynb
 KafkaConsumer.py
