@@ -25,7 +25,7 @@ class AirTraffic:
             print(f"Failed to retrieve flight data. Status code: {response.status_code}")
             return None
 
-    def data_to_df(self, response, country):
+    def data_to_df(self, response):
         
         col_names = ['icao24', 'callsign', 'origin_country', 'time_position', 'last_contact', 'longitude', 'latitude', 'baro_altitude', 'on_ground', 'velocity', 'true_track', 'vertical_rate', 'sensors', 'geo_altitude', 'squawk', 'spi', 'position_source', 'category']
 
@@ -33,7 +33,7 @@ class AirTraffic:
         df.columns = col_names
 
         # creating cols api_call_timestamp, bbox_country
-        df['api_call_timestamp'] = datetime.date.fromtimestamp(int(response['time'])).strftime('%Y-%m-%d %H:%M:%S')
+        df['api_call_timestamp'] = datetime.datetime.fromtimestamp(int(response['time'])).strftime('%Y-%m-%d_%H:%M')
         df['bbox_country'] = self.country
 
         return df
