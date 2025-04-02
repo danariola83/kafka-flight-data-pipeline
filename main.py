@@ -5,6 +5,7 @@ from kafkafunctions import kafka_Produce, kafka_Consume
 from concurrent.futures import ThreadPoolExecutor
 
 EC2_dns = get_EC2_dns()
+S3_bucket = 'flight-data-test-bucket-danariola83'
 topic = 'EC2_ip_test1'
 
 country = "Philippines"
@@ -29,4 +30,4 @@ with ThreadPoolExecutor(max_workers=5) as executor:
 
 
 # load each dict in msg as individual json in s3
-load_to_S3(msg, country)
+load_to_S3(msg, country, S3_bucket)

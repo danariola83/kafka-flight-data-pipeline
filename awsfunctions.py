@@ -27,10 +27,10 @@ def get_EC2_dns():
 
     return ec2_dns
 
-def load_to_S3(msg, country):
+def load_to_S3(msg, country, bucket_name):
     s3 = S3FileSystem()
 
     for i in msg:
-        with s3.open("s3://flight-data-test-bucket-danariola83/{}_air_traffic_{}_{}.json".format(country, i['api_call_timestamp'], i['callsign']), 'w') as file:
+        with s3.open("s3://{}/{}_air_traffic_{}_{}.json".format(bucket_name, country, i['api_call_timestamp'], i['callsign']), 'w') as file:
             json.dump(i, file, indent=4)
 
