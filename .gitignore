@@ -1,1 +1,8 @@
 .venv/
+aws_conn_test.py
+kafka-stock-market-streaming.pem
+kafka-stock-market-streaming.pemZone.Identifier
+KafkaConsumer.ipynb
+KafkaConsumer.py
+KafkaProducer.ipynb
+KafkaProducer.py
