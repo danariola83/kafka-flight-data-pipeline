@@ -29,5 +29,5 @@ def load_to_S3(msg, country, bucket_name):
 
     for i in msg:
         with s3.open("s3://{}/{}_air_traffic_{}_{}.json".format(bucket_name, country, i['api_call_timestamp'], i['callsign']), 'w') as file:
-            json.dump(i, file, indent=4)
+            json.dump(i, file)
 
