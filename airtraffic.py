@@ -94,6 +94,7 @@ class AirTraffic:
         df = self.data_to_df(flights_json)
         df = self.df_transformations(df)
         df = self.df_final(df)
+        df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
         return df
 
