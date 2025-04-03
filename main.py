@@ -6,8 +6,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 instance_id = 'i-0755203d7564e5adc'
 EC2_dns = get_EC2_dns(instance_id)
-S3_bucket = 'flight-data-test-bucket-danariola83'
-topic = 'EC2_ip_test1'
+S3_bucket = 'kafka-flight-data'
+topic = 'flight_data'
 
 country = "Philippines"
 lon_min,lat_min = get_min_bbox(country)
@@ -25,10 +25,11 @@ msg = None
 with ThreadPoolExecutor(max_workers=5) as executor:
     f_Consumer = executor.submit(kafka_Consume, EC2_dns, topic)
     f_Producer = executor.submit(kafka_Produce, EC2_dns, flights_json, topic)
-
+    
     # assigns a list of flight dicts returned from kafka_Consume function to msg
     msg = f_Consumer.result()
 
 
 # load each dict in msg as individual json in s3
 load_to_S3(msg, country, S3_bucket)
+
