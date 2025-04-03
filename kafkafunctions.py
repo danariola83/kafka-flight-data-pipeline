@@ -18,7 +18,7 @@ def kafka_Consume(dns, topic):
         bootstrap_servers=[f'{dns}:9092'],
         group_id=None,  
         value_deserializer=lambda x: loads(x.decode('utf-8')),
-        consumer_timeout_ms=15000
+        consumer_timeout_ms=20000
         )
     
     for msg in consumer:
