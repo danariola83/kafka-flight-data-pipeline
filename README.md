@@ -19,23 +19,49 @@ This project implements batch processing of data pulled through API calls made t
 # Procedure
 
 * With EC2 instance set up and key pair (.pem file) stored in project root directory, run command:
-```chmod 400 "{EC2 instance name}.pem"```
+```
+chmod 400 "{EC2 instance name}.pem"
+```
 
 * SSH into the machine
-```ssh -i "kafka-stock-market-streaming.pem" ec2-user@{EC2 Public IPv4 DNS}.com```
+```
+ssh -i "kafka-stock-market-streaming.pem" ec2-user@{EC2 Public IPv4 DNS}.com
+```
 
 * Download and extract Kafka
-```wget https://downloads.apache.org/kafka/3.8.0/kafka_2.12-3.8.0.tgz```
+```
+wget https://downloads.apache.org/kafka/3.8.0/kafka_2.12-3.8.0.tgz
+```
 
-`tar -xvf kafka_2.12-3.8.0.tgz`
+```
+tar -xvf kafka_2.12-3.8.0.tgz
+```
 
-`cd kafka_2.12-3.8.0/`
+```
+cd kafka_2.12-3.8.0/
+```
 
 * Install Java
-`Sudo yum install java-1.8.0-openjdk`
+```
+sudo yum install java-1.8.0-openjdk
+```
 
 * Configure DNS in `server.properties` file
-`sudo nano config/server.properties`
+```
+sudo nano config/server.properties
+```
 
 * Uncomment line and replace `your.host.name` with EC2 public DNS
-    - advertised.listeners=PLAINTEXT://**your.host.name**:9092
+    - `advertised.listeners=PLAINTEXT://**your.host.name**:9092`
+
+* Starting up Zookeeper server
+```
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+* Starting up Kafka server (in a new terminal)
+```
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+```
+```
+bin/kafka-server-start.sh config/server.properties
+```
