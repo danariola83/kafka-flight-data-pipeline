@@ -15,6 +15,9 @@ This project implements batch processing of data pulled through API calls made t
     - Instance type: t2.micro
         - Kafka 2.12-3.8.0
         - Java 1.8.0
+4. kafka-python
+5. Pandas
+
 
 # Procedure
 
@@ -64,4 +67,18 @@ export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
 ```
 ```
 bin/kafka-server-start.sh config/server.properties
+```
+
+* Create Kafka `topic` and `producer`
+```
+bin/kafka-topics.sh --create --topic flight_data --bootstrap-server {EC2 Public DNS}:9092 --replication-factor 1 --partitions 1
+```
+
+```
+bin/kafka-console-producer.sh --topic flight_data --bootstrap-server {EC2 Public DNS}:9092
+```
+
+* Create Kafka `consumer`
+```
+bin/kafka-console-consumer.sh --topic flight_data --bootstrap-server {EC2 Public DNS}:9092
 ```
