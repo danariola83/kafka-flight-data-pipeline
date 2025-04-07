@@ -15,8 +15,9 @@ This project implements batch processing of data pulled through API calls made t
     - Instance type: t2.micro
         - Kafka 2.12-3.8.0
         - Java 1.8.0
-4. kafka-python
-5. Pandas
+4. S3 bucket
+5. kafka-python
+6. Pandas
 
 
 # Procedure
@@ -55,13 +56,13 @@ sudo nano config/server.properties
 ```
 
 * Uncomment line and replace `your.host.name` with EC2 public DNS
-    - `advertised.listeners=PLAINTEXT://**your.host.name**:9092`
+    - `advertised.listeners=PLAINTEXT://your.host.name:9092`
 
 * Starting up Zookeeper server
 ```
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
-* Starting up Kafka server (in a new terminal)
+* Setting memory heap and starting up Kafka server (in a new terminal) 
 ```
 export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
 ```
@@ -78,7 +79,11 @@ bin/kafka-topics.sh --create --topic flight_data --bootstrap-server {EC2 Public 
 bin/kafka-console-producer.sh --topic flight_data --bootstrap-server {EC2 Public DNS}:9092
 ```
 
-* Create Kafka `consumer`
+* Create Kafka `consumer` (in a new terminal)
 ```
 bin/kafka-console-consumer.sh --topic flight_data --bootstrap-server {EC2 Public DNS}:9092
 ```
+
+* Before running `main.py`, set variables `instance_id` and `S3_bucket` appropriately for your environment
+
+* Run `main.py`
