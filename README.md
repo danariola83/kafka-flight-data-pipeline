@@ -13,19 +13,19 @@ This project implements batch processing of data pulled through API calls made t
 3. EC2 machine
     - Machine Image: Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
     - Instance type: t2.micro
-        - Kafka 2.12-2.8.0
+        - Kafka 2.12-3.8.0
         - Java 1.8.0
 
 # Procedure
 
 * With EC2 instance set up and key pair (.pem file) stored in project root directory, run command:
-`chmod 400 "{EC2 instance name}.pem"`
+```chmod 400 "{EC2 instance name}.pem"```
 
 * SSH into the machine
-`ssh -i "kafka-stock-market-streaming.pem" ec2-user@{EC2 Public IPv4 DNS}.com`
+```ssh -i "kafka-stock-market-streaming.pem" ec2-user@{EC2 Public IPv4 DNS}.com```
 
 * Download and extract Kafka
-`wget https://downloads.apache.org/kafka/3.8.0/kafka_2.12-3.8.0.tgz`
+```wget https://downloads.apache.org/kafka/3.8.0/kafka_2.12-3.8.0.tgz```
 
 `tar -xvf kafka_2.12-3.8.0.tgz`
 
